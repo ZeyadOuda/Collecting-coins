@@ -5,11 +5,12 @@ using UnityEngine;
 
 public class script: monoBehavior
 {
-public float JumpSpeed =199+1;
+public float JumpSpeed =200;
 Animator animator;
 bool isGround = false;
 public float speed =10f;
 rigidbody rb;
+
 
 
 void run()
@@ -24,7 +25,6 @@ void run()
         transform.translate(hor* speed* Time.deltaTime,0,ver *Speed *Time.deltaTime);
     }
 
-
 void jump()
 {if (isGround== true)
 
@@ -32,23 +32,33 @@ void jump()
     rb.AddForce(0,JumpSpeed,0);
     Animator.SetBool("IsJumping",true);
 }
-}
+
+
+
+
+
+
+
+
+
 
 void start ()
     {
         rb= GetComponent<Rigidbody>();
         animator=GetComponent<animator>();
     }
+
 void Update()
     {
         run();
-        if(Input.GetKeyDown(KeyCode.Space)) {jump();}
+        if(Input.GetKeyDown(KeyCode.Space)) {jump();}}
 
-    }
-    private void OnCollisionEnter(Collision  collision)
+    
+private void OnCollisionEnter(Collision  collision)
     {
         if (collision.gameObject.tag=="ground"){isGround=true;
-        animator.SetBool("IsJumping",false);
+     
+              animator.SetBool("IsJumping",false);
     }
 }
 private void OnCollisionExit(Collision collision)
